@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Digitalizi — Startup tech spécialisée en data, automation et IA." />
+  <title>Digitalizi</title>
+  <link rel="icon" href="assets/images/favicon.ico" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#accueil" class="nav-logo">
+        <!-- Remplace par ton logo SVG -->
+        <span class="logo-text">Digitalizi</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== SECTION 1 : HERO ========== -->
+  <section class="hero" id="accueil">
+    <div class="hero-content">
+      <h1 class="hero-title">Construire l'intelligence <br/>de demain.</h1>
+      <p class="hero-sub">
+        Digitalizi conçoit des produits data, automation et IA
+        pour les entreprises qui veulent aller plus loin.
+      </p>
+      <div class="hero-buttons">
+        <a href="#projets" class="btn btn-primary">Voir nos projets</a>
+        <a href="#contact" class="btn btn-secondary">Nous contacter</a>
+      </div>
+    </div>
+    <!-- Flèche de scroll vers projets -->
+    <a href="#projets" class="scroll-arrow" aria-label="Descendre vers les projets">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Explorer nos projets</span>
+    </a>
+  </section>
+
+  <!-- ========== SECTION 2 : À PROPOS ========== -->
+  <section class="about" id="services">
+    <div class="container">
+      <h2 class="section-title">Qui sommes-nous ?</h2>
+      <p class="section-sub">
+        Nous sommes une startup tech qui accompagne les PME et scale-ups
+        dans leur transformation digitale via la data, l'automatisation et l'IA.
+      </p>
+      <div class="about-grid">
+        <div class="about-card">
+          <span class="about-icon">◈</span>
+          <h3>Vision</h3>
+          <p>Démocratiser les outils d'intelligence pour toutes les entreprises, quelle que soit leur taille.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-icon">◉</span>
+          <h3>Mission</h3>
+          <p>Concevoir des produits utiles, rapides à déployer, et qui créent une valeur mesurable dès le premier mois.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-icon">◎</span>
+          <h3>Approche</h3>
+          <p>Produit d'abord. On part du problème métier, on construit la solution minimale, on itère vite.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-icon">◐</span>
+          <h3>Clients</h3>
+          <p>PME en croissance, directions data, équipes opérationnelles qui veulent automatiser sans dépendre de l'IT.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 3 : PROJETS ========== -->
+  <section class="projects" id="projets">
+    <div class="container">
+      <h2 class="section-title">Nos projets</h2>
+      <p class="section-sub">Des solutions concrètes, construites pour de vrais problèmes.</p>
+
+      <div class="projects-grid">
+
+        <!-- Carte projet 1 — à dupliquer pour chaque projet -->
+        <div class="project-card">
+          <div class="project-preview">
+            <div class="project-placeholder">Dashboard</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+            </div>
+            <h3 class="project-title">Digital Dashboard</h3>
+            <p class="project-desc">Dashboard analytique pour PME — visualisation KPIs en temps réel.</p>
+            <div class="project-actions">
+              <a href="https://digitalizi.github.io/project-analytics-dashboard/" class="btn btn-primary btn-sm">Découvrir</a>
+              <a href="https://github.com/digitalizi/project-analytics-dashboard" class="btn btn-ghost btn-sm" target="_blank">Code source</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carte projet 2 -->
+        <div class="project-card">
+          <div class="project-preview">
+            <div class="project-placeholder">CRM</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+            </div>
+            <h3 class="project-title">SaaS CRM</h3>
+            <p class="project-desc">CRM léger et automatisé pour équipes commerciales en croissance.</p>
+            <div class="project-actions">
+              <a href="https://digitalizi.github.io/project-saas-crm/" class="btn btn-primary btn-sm">Découvrir</a>
+              <a href="https://github.com/digitalizi/project-saas-crm" class="btn btn-ghost btn-sm" target="_blank">Code source</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carte projet 3 -->
+        <div class="project-card">
+          <div class="project-preview">
+            <div class="project-placeholder">BI</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">SQL</span>
+              <span class="tag">BI</span>
+            </div>
+            <h3 class="project-title">BI Platform</h3>
+            <p class="project-desc">Plateforme décisionnelle connectée aux sources de données métier.</p>
+            <div class="project-actions">
+              <a href="https://digitalizi.github.io/project-bi-platform/" class="btn btn-primary btn-sm">Découvrir</a>
+              <a href="https://github.com/digitalizi/project-bi-platform" class="btn btn-ghost btn-sm" target="_blank">Code source</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 4 : CONTACT ========== -->
+  <section class="contact" id="contact">
+    <div class="container contact-inner">
+      <h2 class="section-title">Travaillons ensemble.</h2>
+      <p class="section-sub">Un projet ? Une idée ? On écoute.</p>
+      <a href="mailto:hello@digitalizi.com" class="btn btn-primary">hello@digitalizi.com</a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo-text">Digitalizi</span>
+      <span class="footer-copy">© 2025 — Tous droits réservés</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
