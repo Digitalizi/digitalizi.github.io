@@ -282,6 +282,7 @@ body::after{
   z-index:1;opacity:0;animation:fu .6s var(--ease) 1.4s forwards;
 }
 .scue svg{animation:bob 2.2s ease-in-out infinite}
+@keyframes dotpulse{0%,100%{opacity:1}50%{opacity:.28}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 @keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
@@ -743,6 +744,10 @@ section{padding:120px 0}
   .sep{transform:scaleX(1);opacity:1;transition:none}
 }
 
+
+.mob-sep{font-size:.52rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--l3);padding:18px 0 6px;border-bottom:1px solid var(--l1)}
+.mob a[href$=".html"]{font-size:1rem;color:rgba(255,255,255,.45);padding:10px 0}
+.mob a[href*=".html"]:not([href="index.html"]){font-size:1rem;color:rgba(255,255,255,.45);padding:10px 0}
 </style>
 </head>
 <body>
@@ -776,7 +781,13 @@ section{padding:120px 0}
 <!-- Menu mobile full-screen -->
 <div class="mob" id="mob" role="navigation" aria-label="Menu mobile">
   <a href="#accueil" onclick="cm()">Accueil</a>
-  <a href="#services" onclick="cm()">Services</a>
+  <div class="mob-sep">Services</div>
+  <a href="cloud.html" onclick="cm()">— Cloud</a>
+  <a href="cybersecurite.html" onclick="cm()">— Cybersécurité</a>
+  <a href="developpement.html" onclick="cm()">— Développement logiciel</a>
+  <a href="integration.html" onclick="cm()">— Intégration de systèmes</a>
+  <a href="automatisation.html" onclick="cm()">— Automatisation</a>
+  <a href="conseil.html" onclick="cm()">— Conseil informatique</a>
   <a href="#pourquoi" onclick="cm()">Approche</a>
   <a href="#contact" onclick="cm()">Contact</a>
 </div>
@@ -1173,9 +1184,9 @@ section{padding:120px 0}
       <span class="fbot-copy">© 2026 Digitalizi</span>
       <span class="fbot-adresse">229 Rue Saint-Honoré, 75001 Paris</span>
       <div class="fbot-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">Confidentialité</a>
-        <a href="#">Cookies</a>
+        <a href="mentions.html">Mentions légales</a>
+        <a href="mentions.html#rgpd">Confidentialité</a>
+        <a href="mentions.html#cookies">Cookies</a>
       </div>
     </div>
   </div>

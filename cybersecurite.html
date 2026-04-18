@@ -266,6 +266,9 @@ section{padding:110px 0}
   .res-grid{grid-template-columns:1fr 1fr}
   .fbot{flex-direction:column;text-align:center}
 }
+
+.mob-sep{font-size:.52rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--l3);padding:18px 0 6px;border-bottom:1px solid var(--l1)}
+.mob a[href*=".html"]:not([href="index.html"]){font-size:1rem;color:rgba(255,255,255,.45);padding:10px 0}
 </style>
 </head>
 <body>
@@ -292,11 +295,17 @@ section{padding:110px 0}
   </div>
 </nav>
 
-<div class="mob" id="mob">
-  <a href="index.html">Accueil</a>
-  <a href="index.html#services">Services</a>
-  <a href="index.html#pourquoi">Approche</a>
-  <a href="index.html#contact">Contact</a>
+<div class="mob" id="mob" role="navigation" aria-label="Menu mobile">
+  <a href="index.html" onclick="cm()">Accueil</a>
+  <div class="mob-sep">Services</div>
+  <a href="cloud.html" onclick="cm()">— Cloud</a>
+  <a href="cybersecurite.html" onclick="cm()">— Cybersécurité</a>
+  <a href="developpement.html" onclick="cm()">— Développement logiciel</a>
+  <a href="integration.html" onclick="cm()">— Intégration de systèmes</a>
+  <a href="automatisation.html" onclick="cm()">— Automatisation</a>
+  <a href="conseil.html" onclick="cm()">— Conseil informatique</a>
+  <a href="index.html#pourquoi" onclick="cm()">Approche</a>
+  <a href="index.html#contact" onclick="cm()">Contact</a>
 </div>
 
 <!-- HERO -->
@@ -306,8 +315,8 @@ section{padding:110px 0}
   <div class="orb o2"></div>
   <div class="hbody">
     <div class="badge"><span class="bdot"></span>Audit · Pentest · SOC · ISO 27001 · RGPD</div>
-    <h1 class="h1"><span class="hl"><span>Vos failles,</span></span><span class="hl"><span>trouvées avant</span></span><span class="hl"><span>les attaquants.</span></span></h1>
-    <p class="hsub">43 % des cyberattaques ciblent des PME. Audit, protection et conformité réglementaire — avant que l'incident arrive.</p>
+    <h1 class="h1"><span class="hl"><span>La question n'est pas si vous serez attaqués.</span></span><span class="hl"><span>C'est quand.</span></span></h1>
+    <p class="hsub">43 % des cyberattaques visent des PME. La plupart n\'avaient pas de plan. Nous, on vous en construit un — avant que vous en ayez besoin.</p>
     <div class="hbtns">
       <a href="index.html#contact" class="btn bw">Nous contacter <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="index.html#services" class="btn bo">Tous nos services</a>
@@ -322,7 +331,7 @@ section{padding:110px 0}
   <div class="wrap">
     <div class="prob-left">
       <span class="stag rv">Le constat</span>
-      <h2 class="stitre rv">La sécurité IT est souvent la dernière priorité — jusqu'au jour où elle devient l'unique urgence.</h2>
+      <h2 class="stitre rv">La sécurité IT attend toujours d'être prioritaire. Les attaquants, non.</h2>
       <div class="rv" style="margin-top:2rem"><div class="pl"><span>Accès non contrôlés, mots de passe partagés</span><span class="pp">Vulnérabilité critique</span></div><div class="pl"><span>Données clients sans chiffrement</span><span class="pp">Non-conformité RGPD</span></div><div class="pl"><span>Aucun plan de réponse à incident</span><span class="pp">Risque existentiel</span></div><div class="pl"><span>Fournisseurs tiers avec accès non audités</span><span class="pp">Surface d'attaque cachée</span></div></div>
     </div>
     <div class="prob-stat rv">
@@ -338,7 +347,7 @@ section{padding:110px 0}
 <section style="background:var(--n);padding:110px 0">
   <div class="wrap">
     <span class="stag rv">Notre approche</span>
-    <h2 class="stitre rv" style="margin-bottom:2.4rem">Comment on travaille.</h2>
+    <h2 class="stitre rv" style="margin-bottom:2.4rem">En 4 étapes, votre sécurité passe de subie à maîtrisée.</h2>
     <div class="ap-list">
       <div class="ap-item rv">
           <div class="ap-n">01</div>
@@ -374,15 +383,11 @@ section{padding:110px 0}
 <!-- RÉSULTATS -->
 <section class="res-sec">
   <div class="wrap">
-    <span class="stag rv">Résultats</span>
-    <h2 class="stitre rv">Ce que vous gagnez.</h2>
-    <p class="ssous rv">Des engagements mesurables, pas des promesses.</p>
+    <span class="stag rv">Engagements</span>
+    <h2 class="stitre rv">Nos engagements.</h2>
+    <p class="ssous rv">Ce que nous nous engageons à vous livrer, par écrit, dès le démarrage.</p>
     <div class="res-grid">
-      <div class="res-item rv"><div class="res-val val-anim">100%</div><div class="res-label">des failles
-critiques corrigées</div></div><div class="res-item rv"><div class="res-val val-anim">RGPD</div><div class="res-label">conformité
-garantie</div></div><div class="res-item rv"><div class="res-val val-anim">ISO 27001</div><div class="res-label">accompagnement
-certification</div></div><div class="res-item rv"><div class="res-val val-anim">24/7</div><div class="res-label">surveillance
-continue</div></div>
+      <div class="res-item rv"><div class="res-val val-anim">100%</div><div class="res-label">des failles critiques documentées et traitées dans le rapport final</div></div><div class="res-item rv"><div class="res-val val-anim">RGPD</div><div class="res-label">accompagnement complet — de l'audit au registre de traitement</div></div><div class="res-item rv"><div class="res-val val-anim">ISO 27001</div><div class="res-label">préparation à la certification incluse dans la mission</div></div><div class="res-item rv"><div class="res-val val-anim">24/7</div><div class="res-label">surveillance active — alerte et intervention sans délai</div></div>
     </div>
   </div>
 </section>
@@ -405,8 +410,8 @@ continue</div></div>
 <!-- CTA -->
 <section class="cta-sec">
   <div class="wrap rv">
-    <h2>Ne découvrez pas vos failles sous la pression d'un incident.</h2>
-    <p>Audit de sécurité gratuit de 30 minutes pour évaluer votre exposition réelle.</p>
+    <h2>Votre prochaine attaque est peut-être déjà en cours.</h2>
+    <p>30 minutes pour évaluer votre exposition réelle — et savoir exactement où vous en êtes.</p>
     <div class="cta-btns">
       <a href="index.html#contact" class="btn bw">Nous contacter <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="mailto:contact@digitalizi.eu" class="btn bo">contact@digitalizi.eu</a>
@@ -448,7 +453,7 @@ continue</div></div>
     </div>
     <div class="fbot">
       <span class="fbot-copy">© 2026 Digitalizi — 229 Rue Saint-Honoré, 75001 Paris</span>
-      <div class="fbot-links"><a href="#">Mentions légales</a><a href="#">Confidentialité</a></div>
+      <div class="fbot-links"><a href="mentions.html">Mentions légales</a><a href="mentions.html#rgpd">Confidentialité</a></div>
     </div>
   </div>
 </footer>

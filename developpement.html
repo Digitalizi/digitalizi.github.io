@@ -266,6 +266,9 @@ section{padding:110px 0}
   .res-grid{grid-template-columns:1fr 1fr}
   .fbot{flex-direction:column;text-align:center}
 }
+
+.mob-sep{font-size:.52rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--l3);padding:18px 0 6px;border-bottom:1px solid var(--l1)}
+.mob a[href*=".html"]:not([href="index.html"]){font-size:1rem;color:rgba(255,255,255,.45);padding:10px 0}
 </style>
 </head>
 <body>
@@ -292,11 +295,17 @@ section{padding:110px 0}
   </div>
 </nav>
 
-<div class="mob" id="mob">
-  <a href="index.html">Accueil</a>
-  <a href="index.html#services">Services</a>
-  <a href="index.html#pourquoi">Approche</a>
-  <a href="index.html#contact">Contact</a>
+<div class="mob" id="mob" role="navigation" aria-label="Menu mobile">
+  <a href="index.html" onclick="cm()">Accueil</a>
+  <div class="mob-sep">Services</div>
+  <a href="cloud.html" onclick="cm()">— Cloud</a>
+  <a href="cybersecurite.html" onclick="cm()">— Cybersécurité</a>
+  <a href="developpement.html" onclick="cm()">— Développement logiciel</a>
+  <a href="integration.html" onclick="cm()">— Intégration de systèmes</a>
+  <a href="automatisation.html" onclick="cm()">— Automatisation</a>
+  <a href="conseil.html" onclick="cm()">— Conseil informatique</a>
+  <a href="index.html#pourquoi" onclick="cm()">Approche</a>
+  <a href="index.html#contact" onclick="cm()">Contact</a>
 </div>
 
 <!-- HERO -->
@@ -338,7 +347,7 @@ section{padding:110px 0}
 <section style="background:var(--n);padding:110px 0">
   <div class="wrap">
     <span class="stag rv">Notre approche</span>
-    <h2 class="stitre rv" style="margin-bottom:2.4rem">Comment on travaille.</h2>
+    <h2 class="stitre rv" style="margin-bottom:2.4rem">En 4 étapes, de l'idée au logiciel en production.</h2>
     <div class="ap-list">
       <div class="ap-item rv">
           <div class="ap-n">01</div>
@@ -374,15 +383,11 @@ section{padding:110px 0}
 <!-- RÉSULTATS -->
 <section class="res-sec">
   <div class="wrap">
-    <span class="stag rv">Résultats</span>
-    <h2 class="stitre rv">Ce que vous gagnez.</h2>
-    <p class="ssous rv">Des engagements mesurables, pas des promesses.</p>
+    <span class="stag rv">Engagements</span>
+    <h2 class="stitre rv">Nos engagements.</h2>
+    <p class="ssous rv">Ce que nous nous engageons à vous livrer, par écrit, dès le démarrage.</p>
     <div class="res-grid">
-      <div class="res-item rv"><div class="res-val val-anim">3 sem.</div><div class="res-label">premier
-livrable concret</div></div><div class="res-item rv"><div class="res-val val-anim">0</div><div class="res-label">dette technique
-à la livraison</div></div><div class="res-item rv"><div class="res-val val-anim">100%</div><div class="res-label">sur mesure
-par définition</div></div><div class="res-item rv"><div class="res-val val-anim">∞</div><div class="res-label">évolutivité
-de l'architecture</div></div>
+      <div class="res-item rv"><div class="res-val val-anim">3 sem.</div><div class="res-label">premier livrable fonctionnel — démontrable, pas une maquette</div></div><div class="res-item rv"><div class="res-val val-anim">0</div><div class="res-label">dette technique — code documenté et testé à chaque livraison</div></div><div class="res-item rv"><div class="res-val val-anim">100%</div><div class="res-label">sur mesure — aucun template, aucun générique</div></div><div class="res-item rv"><div class="res-val val-anim">Architecture</div><div class="res-label">documentée, transmissible, évolutive sans tout reconstruire</div></div>
     </div>
   </div>
 </section>
@@ -448,7 +453,7 @@ de l'architecture</div></div>
     </div>
     <div class="fbot">
       <span class="fbot-copy">© 2026 Digitalizi — 229 Rue Saint-Honoré, 75001 Paris</span>
-      <div class="fbot-links"><a href="#">Mentions légales</a><a href="#">Confidentialité</a></div>
+      <div class="fbot-links"><a href="mentions.html">Mentions légales</a><a href="mentions.html#rgpd">Confidentialité</a></div>
     </div>
   </div>
 </footer>
