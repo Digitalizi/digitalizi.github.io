@@ -1189,6 +1189,400 @@ section{opacity:1}
 }
 .cadre p{font-size:.78rem;color:var(--t);line-height:1.85}
 
+
+/* ════════════════════════════════════════════════════
+   ANIMATIONS TECH PRO
+════════════════════════════════════════════════════ */
+
+/* ── Glitch sur le titre h1 au hover ── */
+.h1{position:relative}
+.h1:hover{animation:glitch-main .4s var(--ease)}
+@keyframes glitch-main{
+  0%,100%{transform:none;filter:none}
+  20%{transform:translate(-2px,1px);filter:hue-rotate(90deg)}
+  40%{transform:translate(2px,-1px) skewX(-1deg)}
+  60%{transform:translate(-1px,2px);filter:brightness(1.3)}
+  80%{transform:translate(1px,-1px)}
+}
+
+/* ── Scan line sur les cadres .cadre ── */
+.cadre-scan{
+  position:absolute;left:0;right:0;height:1px;top:-100%;
+  background:linear-gradient(90deg,transparent,rgba(129,140,248,.6),rgba(34,197,94,.4),transparent);
+  pointer-events:none;z-index:2;
+  transition:none;
+}
+.cadre:hover .cadre-scan{
+  animation:scan-down .7s var(--ease) forwards;
+}
+@keyframes scan-down{
+  0%{top:-2px;opacity:1}
+  100%{top:102%;opacity:0}
+}
+
+/* ── Hexagone décoratif pulsant dans le hero ── */
+.hex-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  overflow:hidden;opacity:.04;
+}
+.hex-grid svg{width:100%;height:100%}
+
+/* ── Texte glitch sur les .stag ── */
+.stag{position:relative;display:inline-block}
+.stag::before,.stag::after{
+  content:attr(data-text);
+  position:absolute;left:0;top:0;
+  width:100%;
+  opacity:0;pointer-events:none;
+}
+.stag:hover::before{
+  color:var(--v);
+  animation:glitch-a .35s steps(2) forwards;
+  clip-path:polygon(0 0,100% 0,100% 35%,0 35%);
+  transform:translate(-2px,0);
+}
+.stag:hover::after{
+  color:var(--acc);
+  animation:glitch-b .35s steps(2) forwards;
+  clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);
+  transform:translate(2px,0);
+}
+@keyframes glitch-a{0%,100%{opacity:0}50%{opacity:.8}}
+@keyframes glitch-b{0%,100%{opacity:0}50%{opacity:.6}}
+
+/* ── Bordure animée (border-beam) sur les cartes service ── */
+.svc-card::before{
+  content:'';position:absolute;inset:-1px;
+  border-radius:13px;padding:1px;z-index:-1;
+  background:linear-gradient(
+    var(--beam-angle,0deg),
+    transparent 0%,transparent 40%,
+    rgba(129,140,248,.6) 50%,
+    rgba(34,197,94,.4) 55%,
+    transparent 60%,transparent 100%
+  );
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:0;transition:opacity .3s;
+}
+.svc-card:hover::before{
+  opacity:1;
+  animation:beam-rotate 2s linear infinite;
+}
+@keyframes beam-rotate{
+  to{--beam-angle:360deg}
+}
+@property --beam-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+
+/* ── Particule flottante sur les stat numbers ── */
+.hsn,.chiffre-n{position:relative}
+
+/* ── Néon glow sur les liens actifs navbar ── */
+.nav-links a.on{
+  color:var(--w);
+  text-shadow:0 0 8px rgba(129,140,248,.6),0 0 20px rgba(129,140,248,.3);
+}
+
+/* ── Circuit board lines dans les sections dark ── */
+.circuit{
+  position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.06;
+  overflow:hidden;
+}
+.circuit svg{width:100%;height:100%}
+
+/* ── Hover magnetic sur les boutons ── */
+.btn-magnetic{transition:transform .2s var(--ease),box-shadow .2s}
+
+/* ── Progress bar sections ── */
+.section-progress{
+  position:absolute;bottom:0;left:0;height:1px;width:0;
+  background:linear-gradient(90deg,var(--acc),var(--v));
+  transition:width 1.2s var(--ease);
+  z-index:2;
+}
+section:hover .section-progress{width:100%}
+
+/* ── Data stream sur le hero ── */
+.data-stream{
+  position:absolute;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,transparent,var(--acc),transparent);
+  opacity:0;pointer-events:none;z-index:0;
+  animation:stream-flow 3s ease-in-out infinite;
+}
+.data-stream:nth-child(1){left:20%;animation-delay:0s}
+.data-stream:nth-child(2){left:50%;animation-delay:1s;background:linear-gradient(180deg,transparent,var(--v),transparent)}
+.data-stream:nth-child(3){left:80%;animation-delay:2s}
+@keyframes stream-flow{
+  0%{opacity:0;transform:translateY(-100%)}
+  15%{opacity:.7}
+  85%{opacity:.4}
+  100%{opacity:0;transform:translateY(100%)}
+}
+
+/* ── Floating badge tech dans le hero ── */
+.tech-badge{
+  position:absolute;display:inline-flex;align-items:center;gap:6px;
+  font-size:.55rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(7,7,15,.8);border:1px solid var(--l2);border-radius:100px;
+  padding:5px 12px;backdrop-filter:blur(8px);color:var(--t);
+  animation:badge-float 4s ease-in-out infinite;z-index:2;
+}
+.tech-badge .dot{width:4px;height:4px;border-radius:50%;flex-shrink:0}
+.tech-badge:nth-child(1){top:22%;left:8%;animation-delay:0s}
+.tech-badge:nth-child(2){top:35%;right:7%;animation-delay:1.4s}
+.tech-badge:nth-child(3){bottom:26%;left:6%;animation-delay:2.6s}
+@keyframes badge-float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+@media(max-width:768px){
+  .tech-badge{display:none}
+  .data-stream{display:none}
+  .circuit{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .h1:hover{animation:none}
+  .svc-card:hover::before{animation:none}
+  .data-stream{animation:none}
+  .tech-badge{animation:none}
+  .cadre:hover .cadre-scan{animation:none}
+}
+
+
+/* ════════════════════════════════════════════════════
+   MEGA ANIMATIONS TECH PRO
+════════════════════════════════════════════════════ */
+
+/* ── Scanline overlay global ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:8999;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,
+    rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);
+  animation:scanlines 8s linear infinite;
+}
+@keyframes scanlines{0%{background-position:0 0}100%{background-position:0 100px}}
+
+/* ── Halo pulsant sur le hero h1 ── */
+.h1{
+  text-shadow:0 0 40px rgba(129,140,248,.0);
+  animation:halo-pulse 4s ease-in-out infinite;
+}
+@keyframes halo-pulse{
+  0%,100%{text-shadow:0 0 20px rgba(129,140,248,.0)}
+  50%{text-shadow:0 0 40px rgba(129,140,248,.15),0 0 80px rgba(34,197,94,.08)}
+}
+
+/* ── Particles flottantes CSS sur la section problème ── */
+.float-particle{
+  position:absolute;border-radius:50%;pointer-events:none;
+  animation:float-up linear infinite;opacity:0;
+}
+@keyframes float-up{
+  0%{transform:translateY(0) scale(1);opacity:0}
+  10%{opacity:.6}
+  90%{opacity:.2}
+  100%{transform:translateY(-120px) scale(0.4);opacity:0}
+}
+
+/* ── Bordure tournante sur les chiffres hero ── */
+.hsn-wrap{
+  position:relative;display:inline-block;
+  padding:4px 8px;
+}
+.hsn-wrap::before{
+  content:'';position:absolute;inset:-2px;border-radius:6px;padding:1px;
+  background:conic-gradient(from var(--angle,0deg),
+    transparent 0%,transparent 70%,var(--acc) 85%,transparent 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spin-border 3s linear infinite;
+  opacity:0;transition:opacity .3s;
+}
+.hstats:hover .hsn-wrap::before{opacity:1}
+@keyframes spin-border{to{--angle:360deg}}
+@property --angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+
+/* ── Glow vert sur la section hero badge ── */
+.badge{
+  animation:badge-glow 3s ease-in-out infinite;
+}
+@keyframes badge-glow{
+  0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}
+  50%{box-shadow:0 0 12px 2px rgba(34,197,94,.15)}
+}
+
+/* ── Matrix rain effect sur section vision ── */
+.matrix-bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  overflow:hidden;opacity:.06;font-family:monospace;
+}
+.matrix-col{
+  position:absolute;top:-20px;
+  font-size:10px;color:var(--v);
+  animation:matrix-fall linear infinite;
+  writing-mode:vertical-rl;letter-spacing:2px;
+}
+@keyframes matrix-fall{
+  0%{transform:translateY(-100%);opacity:1}
+  100%{transform:translateY(110vh);opacity:0}
+}
+
+/* ── Laser beam sur les separateurs ── */
+.sep::after{
+  content:'';position:absolute;top:0;left:0;
+  width:60px;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(129,140,248,.8),transparent);
+  animation:laser-sweep 3s ease-in-out infinite;
+  pointer-events:none;
+}
+.sep{position:relative;overflow:hidden}
+@keyframes laser-sweep{
+  0%{left:-60px;opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{left:calc(100% + 60px);opacity:0}
+}
+
+/* ── Morphing border sur les svc-card ── */
+.svc-card{
+  border-radius:12px;
+  transition:border-radius .4s var(--ease),border-color .22s,
+    transform .3s var(--ease),box-shadow .3s,background .22s;
+}
+.svc-card:hover{border-radius:16px 6px 16px 6px}
+
+/* ── Nombre counter glitch ── */
+@keyframes num-glitch{
+  0%,100%{clip-path:none;transform:none}
+  20%{clip-path:polygon(0 30%,100% 30%,100% 50%,0 50%);transform:translate(-2px,0)}
+  40%{clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);transform:translate(2px,0)}
+  60%{clip-path:none;transform:none}
+}
+
+/* ── Hover trail sur les temo-cards ── */
+.temo-card{
+  transition:border-color .22s,transform .3s var(--ease),box-shadow .3s;
+  overflow:hidden;
+}
+.temo-glow{
+  position:absolute;width:100px;height:100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(129,140,248,.2),transparent 70%);
+  pointer-events:none;transform:translate(-50%,-50%);
+  opacity:0;transition:opacity .3s;z-index:0;
+}
+.temo-card:hover .temo-glow{opacity:1}
+
+/* ── Shimmer sur les boutons .bw ── */
+.bw::after{
+  content:'';position:absolute;top:0;left:-150%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  animation:shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer{
+  0%{left:-150%}60%,100%{left:150%}
+}
+
+/* ── Neon sign flicker sur le logo ── */
+.nav-logo{animation:neon-flicker 6s ease-in-out infinite}
+@keyframes neon-flicker{
+  0%,19%,21%,23%,25%,54%,56%,100%{filter:drop-shadow(0 0 16px rgba(255,255,255,.18))}
+  20%,24%,55%{filter:drop-shadow(0 0 2px rgba(255,255,255,.05))}
+}
+
+/* ── Pulsing ring sur le bouton principal ── */
+.hbtns .bw::before{
+  content:'';position:absolute;inset:-4px;border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  animation:ring-pulse 2s ease-out infinite;pointer-events:none;
+}
+@keyframes ring-pulse{
+  0%{transform:scale(1);opacity:.6}
+  100%{transform:scale(1.08);opacity:0}
+}
+
+/* ── Animated gradient border sur les cadres ── */
+.cadre{
+  background:linear-gradient(var(--n3),var(--n3)) padding-box,
+    conic-gradient(from var(--cadre-angle,0deg) at 50% 50%,
+      var(--l2) 0%,var(--acc) 20%,var(--l2) 40%,
+      var(--v) 60%,var(--l2) 80%,var(--l2) 100%) border-box;
+  border-color:transparent;
+}
+.cadre:hover{
+  animation:cadre-spin 3s linear infinite;
+}
+@keyframes cadre-spin{to{--cadre-angle:360deg}}
+@property --cadre-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+
+/* ── Texte reveal ligne par ligne sur les prob-lignes ── */
+.prob-ligne{
+  clip-path:polygon(0 0,0 0,0 100%,0 100%);
+  transition:clip-path .6s var(--ease),background .2s,padding-left .2s var(--ease);
+}
+.prob-ligne.on{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+
+/* ── Floating dots autour du badge hero ── */
+.badge-orbit{
+  position:absolute;inset:-20px;border-radius:50%;pointer-events:none;
+  animation:orbit-spin 6s linear infinite;
+}
+.badge-orbit::before{
+  content:'';position:absolute;top:0;left:50%;
+  width:4px;height:4px;border-radius:50%;
+  background:var(--v);box-shadow:0 0 6px var(--v);
+  transform:translateX(-50%);
+}
+.badge{position:relative;overflow:visible}
+
+/* ── Tracer effect sur les nav links ── */
+.nav-links li{position:relative;overflow:hidden}
+.nav-links li::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:1px;background:var(--acc);
+  transition:width .3s var(--ease);
+}
+.nav-links li:hover::after{width:100%}
+
+/* ── Glow card hover sur les real-items ── */
+.real-item::before{
+  content:'';position:absolute;
+  width:150%;height:150%;
+  background:radial-gradient(circle,rgba(129,140,248,.06) 0%,transparent 60%);
+  top:-25%;left:-25%;
+  opacity:0;transition:opacity .4s;pointer-events:none;z-index:0;
+}
+.real-item:hover::before{opacity:1}
+
+/* ── Scroll velocity indicator ── */
+.vel-bar{
+  position:fixed;right:12px;top:50%;transform:translateY(-50%);
+  width:2px;height:60px;background:var(--l2);border-radius:2px;z-index:9001;
+  pointer-events:none;overflow:hidden;
+}
+.vel-fill{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(0deg,var(--v),var(--acc));
+  border-radius:2px;
+  transition:height .1s ease;
+}
+
+@media(max-width:640px){
+  .vel-bar{display:none}
+  .stitre{-webkit-text-fill-color:var(--w);background:none}
+  body::before{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  body::before,.matrix-col,.laser-sweep,.halo-pulse,.badge-orbit,
+  .vel-bar,body::after{display:none !important}
+  .nav-logo{animation:none}
+  .h1{animation:none;text-shadow:none}
+  .stitre{-webkit-text-fill-color:var(--w);background:none}
+  .svc-card,.cadre{animation:none}
+}
+
 </style>
 </head>
 <body>
@@ -1241,7 +1635,13 @@ section{opacity:1}
 <!-- ══ HERO ══ -->
 <section class="hero" id="accueil">
   <canvas id="cv"></canvas>
+  <div class="data-stream"></div>
+  <div class="data-stream"></div>
+  <div class="data-stream"></div>
   <div class="hero-aurora" aria-hidden="true"></div>
+  <div class="tech-badge" style="top:22%;left:8%"><span class="dot" style="background:#3b82f6"></span>Azure · AWS · GCP</div>
+  <div class="tech-badge" style="top:38%;right:7%"><span class="dot" style="background:#22c55e"></span>ISO 27001 · RGPD</div>
+  <div class="tech-badge" style="bottom:28%;left:6%"><span class="dot" style="background:#818cf8"></span>React · Node.js · API</div>
   <div class="code-bg" aria-hidden="true">
   <div class="code-line" style="top:8%;animation-duration:18.0s;animation-delay:-0.0s">const deploy = await cloud.migrate({ provider: "azure", env: "production" });</div>
 <div class="code-line" style="top:20%;animation-duration:20.5s;animation-delay:-3.1s">if (security.scan(target).criticalVulnerabilities > 0) alert.trigger("CRITICAL");</div>
@@ -1256,7 +1656,7 @@ section{opacity:1}
   <div class="orb o1"></div>
   <div class="orb o2"></div>
   <div class="hbody">
-    <div class="badge"><span class="bdot"></span><span class="hbadge-item">Services IT</span><span class="hbadge-item">Paris</span><span class="hbadge-item">Europe</span></div>
+    <div class="badge" style="position:relative"><span class="badge-orbit"></span><span class="bdot"></span><span class="hbadge-item">Services IT</span><span class="hbadge-item">Paris</span><span class="hbadge-item">Europe</span></div>
     <h1 class="h1">Votre infrastructure.<br><span class="dim">Notre obsession.</span></h1>
     <p class="hsub">
       Cloud, cybersécurité et automatisation<br>
@@ -1271,22 +1671,22 @@ section{opacity:1}
     </div>
     <div class="hstats">
       <div>
-        <span class="hsn">300 Md€</span>
+        <span class="hsn-wrap"><span class="hsn">300 Md€</span></span>
         <span class="hsl">Marché IT européen</span>
       </div>
       <div class="hss"></div>
       <div>
-        <span class="hsn">+12%</span>
+        <span class="hsn-wrap"><span class="hsn">+12%</span></span>
         <span class="hsl">Croissance annuelle</span>
       </div>
       <div class="hss"></div>
       <div>
-        <span class="hsn">43%</span>
+        <span class="hsn-wrap"><span class="hsn">43%</span></span>
         <span class="hsl">Cyberattaques visant les PME</span>
       </div>
       <div class="hss"></div>
       <div>
-        <span class="hsn">48h</span>
+        <span class="hsn-wrap"><span class="hsn">48h</span></span>
         <span class="hsl">Pour démarrer</span>
       </div>
     </div>
@@ -1302,7 +1702,7 @@ section{opacity:1}
 <!-- ══ PROBLÈME ══ -->
 <section class="probleme" id="probleme">
   <div class="wrap">
-    <span class="stag rv">Le constat</span>
+    <span class="stag rv" data-text="Le constat">Le constat</span>
     <h2 class="stitre rv">Les défis IT des PME européennes.</h2>
     <p class="ssous rv">Des problèmes structurels que nous connaissons — et que nous résolvons.</p>
     <div class="prob-layout">
@@ -1339,9 +1739,9 @@ section{opacity:1}
 <div class="sep"></div>
 
 <!-- ══ VISION ══ -->
-<section class="vision" id="vision">
+<section class="vision" id="vision" style="position:relative">
   <div class="wrap">
-    <span class="stag rv">Notre philosophie</span>
+    <span class="stag rv" data-text="Notre philosophie">Notre philosophie</span>
     <h2 class="stitre rv">L'informatique comme avantage compétitif.</h2>
     <div class="vmots" id="vmots">
       <span class="vmot">Réactif.</span>
@@ -1359,35 +1759,39 @@ section{opacity:1}
 
 <section id="encadres" style="background:var(--n);padding:110px 0">
   <div class="wrap">
-    <span class="stag rv">Pourquoi nous choisir</span>
+    <span class="stag rv" data-text="Pourquoi nous choisir">Pourquoi nous choisir</span>
     <h2 class="stitre rv">Ce qui nous distingue.</h2>
     <p class="ssous rv">Quatre engagements concrets, pas des arguments commerciaux.</p>
 
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:0" class="rvg">
 
       <div class="cadre rv">
-        <div class="cadre-shine"></div>
+        <div class="cadre-shine">
+        <div class="cadre-scan"></div></div>
         <div class="cadre-tag">Réactivité</div>
         <h3>Démarrage en 48h, réponse sous 24h.</h3>
         <p>Pas de comité de validation ni de semaines d'attente. Un premier échange, un plan d'action, un démarrage immédiat. Vous interagissez avec un expert senior du premier appel à la livraison finale.</p>
       </div>
 
       <div class="cadre cadre-v rv">
-        <div class="cadre-shine"></div>
+        <div class="cadre-shine">
+        <div class="cadre-scan"></div></div>
         <div class="cadre-tag" style="color:var(--v)">Transparence</div>
         <h3>Prix fixes, périmètre écrit, aucune surprise.</h3>
         <p>Chaque mission est cadrée par un document signé avant le démarrage : objectifs, livrables, délais, budget. Aucun dépassement sans accord préalable de votre part.</p>
       </div>
 
       <div class="cadre cadre-v rv">
-        <div class="cadre-shine"></div>
+        <div class="cadre-shine">
+        <div class="cadre-scan"></div></div>
         <div class="cadre-tag" style="color:var(--v)">Expertise</div>
         <h3>Senior du début à la fin — jamais un junior.</h3>
         <p>Vous ne parlez pas à un commercial. Vous parlez à l'expert qui va faire le travail. Zéro réexplication à chaque appel, zéro délégation surprise en cours de mission.</p>
       </div>
 
       <div class="cadre rv">
-        <div class="cadre-shine"></div>
+        <div class="cadre-shine">
+        <div class="cadre-scan"></div></div>
         <div class="cadre-tag">Accompagnement</div>
         <h3>On reste disponibles après la livraison.</h3>
         <p>Mise en production, formation de vos équipes, suivi post-déploiement. Notre mission ne s'arrête pas à la dernière ligne de code. Nous restons là pour faire évoluer ce qu'on a construit ensemble.</p>
@@ -1400,10 +1804,10 @@ section{opacity:1}
 <div class="sep"></div>
 
 <!-- ══ SERVICES ══ -->
-<section class="services" id="services">
+<section class="services" style="position:relative" id="services">
   <canvas class="dots-bg" aria-hidden="true"></canvas>
   <div class="wrap">
-    <span class="stag rv">Services</span>
+    <span class="stag rv" data-text="Services">Services</span>
     <h2 class="stitre rv">Ce que nous faisons.</h2>
     <p class="ssous rv">Six expertises. Un partenaire unique. Couverture complète de vos besoins informatiques.</p>
     <div class="svc-grid rvg">
@@ -1492,10 +1896,10 @@ section{opacity:1}
 
 <div class="sep"></div>
 
-<section class="realisations" id="realisations">
+<section class="realisations" style="position:relative" id="realisations">
   <canvas class="dots-bg" aria-hidden="true"></canvas>
   <div class="wrap">
-    <span class="stag rv">Réalisations</span>
+    <span class="stag rv" data-text="Réalisations">Réalisations</span>
     <h2 class="stitre rv">Ce que nous avons livré.</h2>
     <p class="ssous rv">Trois missions types. Des résultats concrets. Des clients qui avancent.</p>
     <div class="real-liste rvg">
@@ -1551,15 +1955,15 @@ section{opacity:1}
 
 <div class="sep"></div>
 
-<section class="temoignages" id="temoignages">
+<section class="temoignages" style="position:relative" id="temoignages">
   <canvas class="dots-bg" aria-hidden="true"></canvas>
   <div class="wrap">
-    <span class="stag rv">Témoignages</span>
+    <span class="stag rv" data-text="Témoignages">Témoignages</span>
     <h2 class="stitre rv">Ce qu'ils en disent.</h2>
     <p class="ssous rv">Des retours concrets de décideurs qui ont fait confiance à Digitalizi.</p>
     <div class="temo-grid rvg">
 
-      <div class="temo-card rv">
+      <div class="temo-card rv"><div class="temo-glow"></div>
         <div class="temo-quote">"</div>
         <p class="temo-txt">On craignait la migration. Elle s'est faite en une nuit, sans interruption. Nos données sont enfin sécurisées et on sait exactement qui y accède. C'est la première fois qu'un prestataire tient vraiment ses engagements.</p>
         <div class="temo-author">
@@ -1573,7 +1977,7 @@ section{opacity:1}
         <div class="temo-service">Cloud & Sécurité</div>
       </div>
 
-      <div class="temo-card rv">
+      <div class="temo-card rv"><div class="temo-glow"></div>
         <div class="temo-quote">"</div>
         <p class="temo-txt">On perdait trois heures par jour à ressaisir des commandes entre nos outils. C'est terminé. L'équipe ne veut plus revenir en arrière. Le ROI a été visible dès la première semaine.</p>
         <div class="temo-author">
@@ -1587,7 +1991,7 @@ section{opacity:1}
         <div class="temo-service">Intégration de systèmes</div>
       </div>
 
-      <div class="temo-card rv">
+      <div class="temo-card rv"><div class="temo-glow"></div>
         <div class="temo-quote">"</div>
         <p class="temo-txt">Trois semaines. C'est tout ce qu'il a fallu pour avoir un outil qu'aucun logiciel du marché ne nous offrait. Livré proprement, documenté, sans surprise. On travaille déjà sur la suite.</p>
         <div class="temo-author">
@@ -1608,7 +2012,7 @@ section{opacity:1}
 <div class="sep"></div>
 
 <!-- ══ POURQUOI DIGITALIZI ══ -->
-<section class="pourquoi" id="pourquoi">
+<section class="pourquoi" style="position:relative" id="pourquoi">
   <canvas class="dots-bg" aria-hidden="true"></canvas>
   <div class="wrap">
     <span class="stag rv">Pourquoi Digitalizi</span>
@@ -1679,7 +2083,7 @@ section{opacity:1}
 <div class="sep"></div>
 
 <!-- ══ CONTACT ══ -->
-<section class="contact-sec" id="contact">
+<section class="contact-sec" style="position:relative" id="contact">
   <canvas class="dots-bg" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="contact-layout">
@@ -2342,6 +2746,388 @@ const noMotionAnim = window.matchMedia('(prefers-reduced-motion:reduce)').matche
     });
   },{threshold:0.08, rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('section').forEach(s=>sectionObs.observe(s));
+})();
+
+
+/* ════════════════════════════════════════════════════
+   ANIMATIONS TECH PRO — JS
+════════════════════════════════════════════════════ */
+
+/* ── Tilt magnétique étendu (cadres + real-items) ── */
+(function(){
+  if(noMotionAnim||window.matchMedia('(pointer:coarse)').matches)return;
+
+  function applyTilt(el, intensity){
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      el.style.transform=`perspective(800px) rotateY(${x*intensity}deg) rotateX(${-y*intensity*.7}deg) translateZ(4px)`;
+      el.style.transition='transform .1s ease';
+    });
+    el.addEventListener('mouseleave',()=>{
+      el.style.transform='';
+      el.style.transition='transform .5s var(--ease)';
+    });
+  }
+
+  document.querySelectorAll('.cadre').forEach(el=>applyTilt(el,8));
+  document.querySelectorAll('.real-item').forEach(el=>applyTilt(el,6));
+  document.querySelectorAll('.temo-card').forEach(el=>applyTilt(el,5));
+})();
+
+/* ── Magnetic buttons ── */
+(function(){
+  if(window.matchMedia('(pointer:coarse)').matches)return;
+  document.querySelectorAll('.btn').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      const x=(e.clientX-r.left-r.width/2)*.25;
+      const y=(e.clientY-r.top-r.height/2)*.25;
+      btn.style.transform=`translate(${x}px,${y}px)`;
+    });
+    btn.addEventListener('mouseleave',()=>{
+      btn.style.transform='';
+    });
+  });
+})();
+
+/* ── Neon trail sur la barre de scroll ── */
+(function(){
+  const sb=document.getElementById('scroll-bar');
+  if(!sb)return;
+  let glow=0;
+  window.addEventListener('scroll',()=>{
+    const max=document.body.scrollHeight-window.innerHeight;
+    const p=window.scrollY/max;
+    sb.style.width=(p*100)+'%';
+    sb.style.boxShadow=`0 0 ${6+p*10}px rgba(129,140,248,${.4+p*.4})`;
+  },{passive:true});
+})();
+
+/* ── Compteur avec effet scramble sur les chiffres ── */
+(function(){
+  if(noMotionAnim)return;
+  const chars='0123456789';
+  function scramble(el, finalVal, duration){
+    const raw=el.dataset.orig||el.textContent.trim();
+    el.dataset.orig=raw;
+    const num=parseFloat(raw.replace(/[^0-9.]/g,''));
+    if(isNaN(num)||num===0)return;
+    const prefix=raw.match(/^[^0-9]*/)?.[0]||'';
+    const suffix=raw.match(/[^0-9.]+$/)?.[0]||'';
+    let start=null;
+    function step(ts){
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/duration,1);
+      const ease=1-(1-p)**3;
+      if(p<.6){
+        // Phase scramble : chiffres aléatoires
+        const scrambled=Array.from({length:String(Math.round(num)).length},
+          ()=>chars[Math.floor(Math.random()*chars.length)]).join('');
+        el.textContent=prefix+scrambled+suffix;
+      } else {
+        // Phase reveal : vrai chiffre
+        el.textContent=prefix+Math.round(ease*num)+suffix;
+      }
+      if(p<1)requestAnimationFrame(step);
+      else el.textContent=raw;
+    }
+    requestAnimationFrame(step);
+  }
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        scramble(e.target,null,1800);
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.6});
+  document.querySelectorAll('.hsn,.chiffre-n,.real-val,.res-val').forEach(el=>obs.observe(el));
+})();
+
+/* ── Highlight ligne active des prob-lignes ── */
+(function(){
+  document.querySelectorAll('.prob-ligne').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+      el.style.background='rgba(129,140,248,.04)';
+      el.style.paddingLeft='8px';
+      el.style.transition='background .2s,padding-left .2s var(--ease)';
+    });
+    el.addEventListener('mouseleave',()=>{
+      el.style.background='';
+      el.style.paddingLeft='';
+    });
+  });
+})();
+
+/* ── Glow pulsé sur les icônes svc-card hover ── */
+(function(){
+  if(window.matchMedia('(pointer:coarse)').matches)return;
+  document.querySelectorAll('.svc-card').forEach(card=>{
+    card.addEventListener('mouseenter',()=>{
+      const ico=card.querySelector('.svc-ico');
+      if(ico)ico.style.filter='drop-shadow(0 0 8px rgba(129,140,248,.5))';
+    });
+    card.addEventListener('mouseleave',()=>{
+      const ico=card.querySelector('.svc-ico');
+      if(ico)ico.style.filter='';
+    });
+  });
+})();
+
+/* ── Effet ripple au clic sur les boutons ── */
+(function(){
+  document.querySelectorAll('.btn').forEach(btn=>{
+    btn.addEventListener('click',function(e){
+      const r=this.getBoundingClientRect();
+      const circle=document.createElement('span');
+      const size=Math.max(r.width,r.height);
+      circle.style.cssText=`
+        position:absolute;width:${size}px;height:${size}px;
+        border-radius:50%;background:rgba(255,255,255,.15);
+        left:${e.clientX-r.left-size/2}px;
+        top:${e.clientY-r.top-size/2}px;
+        transform:scale(0);pointer-events:none;
+        animation:ripple .5s ease-out forwards;
+      `;
+      this.style.position='relative';this.style.overflow='hidden';
+      this.appendChild(circle);
+      setTimeout(()=>circle.remove(),600);
+    });
+  });
+  const style=document.createElement('style');
+  style.textContent='@keyframes ripple{to{transform:scale(2.5);opacity:0}}';
+  document.head.appendChild(style);
+})();
+
+
+/* ════════════════════════════════════════════════════
+   MEGA ANIMATIONS JS
+════════════════════════════════════════════════════ */
+(function(){
+  const nM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const isTouch = window.matchMedia('(pointer:coarse)').matches;
+
+  /* ── Matrix rain ── */
+  if(!nM){
+    const vision = document.querySelector('.vision');
+    if(vision){
+      const mat = document.createElement('div');
+      mat.className='matrix-bg';
+      vision.prepend(mat);
+      const chars='アイウエオカキクケコサシスセソ01アイウエオ10ザジズゼゾタチツ';
+      const cols = Math.floor(vision.offsetWidth / 14);
+      for(let i=0;i<Math.min(cols,40);i++){
+        const col=document.createElement('div');
+        col.className='matrix-col';
+        col.style.left=(i/cols*100)+'%';
+        col.style.animationDuration=(8+Math.random()*8)+'s';
+        col.style.animationDelay=(-Math.random()*8)+'s';
+        col.style.opacity=(0.3+Math.random()*0.4).toString();
+        col.textContent=Array.from({length:20},()=>
+          chars[Math.floor(Math.random()*chars.length)]).join('');
+        mat.appendChild(col);
+      }
+    }
+  }
+
+  /* ── Floating particles sur section problème ── */
+  if(!nM){
+    const probSec = document.querySelector('.probleme');
+    if(probSec){
+      probSec.style.position='relative';
+      probSec.style.overflow='hidden';
+      for(let i=0;i<18;i++){
+        const p=document.createElement('div');
+        p.className='float-particle';
+        const size=2+Math.random()*3;
+        p.style.cssText=`
+          width:${size}px;height:${size}px;
+          left:${Math.random()*100}%;
+          bottom:${Math.random()*30}%;
+          background:${Math.random()>.5?'rgba(129,140,248,.5)':'rgba(34,197,94,.4)'};
+          animation-duration:${4+Math.random()*6}s;
+          animation-delay:${-Math.random()*6}s;
+        `;
+        probSec.appendChild(p);
+      }
+    }
+  }
+
+  /* ── Velocity scroll indicator ── */
+  const velFill = document.getElementById('vel-fill');
+  let lastY=0, lastT=0, velAnim=null;
+  if(velFill){
+    window.addEventListener('scroll',()=>{
+      const now=Date.now();
+      const dy=Math.abs(window.scrollY-lastY);
+      const dt=Math.max(now-lastT,1);
+      const vel=Math.min(dy/dt*10,100);
+      velFill.style.height=vel+'%';
+      clearTimeout(velAnim);
+      velAnim=setTimeout(()=>{velFill.style.height='0%';},300);
+      lastY=window.scrollY;lastT=now;
+    },{passive:true});
+  }
+
+  /* ── Mouse glow trail sur temo-cards ── */
+  if(!isTouch){
+    document.querySelectorAll('.temo-card').forEach(card=>{
+      card.addEventListener('mousemove',e=>{
+        const glow=card.querySelector('.temo-glow');
+        if(!glow)return;
+        const r=card.getBoundingClientRect();
+        glow.style.left=(e.clientX-r.left)+'px';
+        glow.style.top=(e.clientY-r.top)+'px';
+      });
+    });
+  }
+
+  /* ── Intersection reveal amélioré avec stagger précis ── */
+  const advObs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      const sec=entry.target;
+      const items=sec.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s');
+      items.forEach((el,i)=>{
+        if(!el.classList.contains('on')){
+          setTimeout(()=>{
+            el.style.transitionDelay='0s';
+            el.classList.add('on');
+          }, i*70);
+        }
+      });
+      advObs.unobserve(sec);
+    });
+  },{threshold:0.06,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('section').forEach(s=>advObs.observe(s));
+
+  /* ── Prob-lignes clip-path reveal ── */
+  const probObs=new IntersectionObserver(entries=>{
+    if(!entries[0].isIntersecting)return;
+    document.querySelectorAll('.prob-ligne').forEach((el,i)=>{
+      setTimeout(()=>el.classList.add('on'),i*130);
+    });
+    probObs.disconnect();
+  },{threshold:.2});
+  const pl=document.querySelector('.prob-lignes');
+  if(pl)probObs.observe(pl);
+
+  /* ── Neon hover sur les nav links ── */
+  if(!isTouch){
+    document.querySelectorAll('.nav-links a').forEach(a=>{
+      a.addEventListener('mouseenter',()=>{
+        a.style.textShadow='0 0 12px rgba(129,140,248,.7)';
+      });
+      a.addEventListener('mouseleave',()=>{
+        if(!a.classList.contains('on'))a.style.textShadow='';
+      });
+    });
+  }
+
+  /* ── Counter with scramble + glitch ── */
+  if(!nM){
+    const CHARS='0123456789';
+    function advCounter(el){
+      const raw=el.dataset.orig||el.textContent.trim();
+      el.dataset.orig=raw;
+      const num=parseFloat(raw.replace(/[^0-9.]/g,''));
+      if(isNaN(num)||num===0)return;
+      const pre=raw.match(/^[^0-9]*/)?.[0]||'';
+      const suf=raw.match(/[^0-9.]+$/)?.[0]||'';
+      const dur=2200,s=performance.now();
+      function step(now){
+        const p=Math.min((now-s)/dur,1);
+        const e=1-(1-p)**4;
+        if(p<.55){
+          const len=String(Math.round(num)).length;
+          el.textContent=pre+Array.from({length:len},()=>
+            CHARS[Math.floor(Math.random()*10)]).join('')+suf;
+        } else {
+          el.textContent=pre+Math.round(e*num)+suf;
+          if(Math.random()<.08){
+            el.style.animation='num-glitch .15s ease';
+            setTimeout(()=>el.style.animation='',200);
+          }
+        }
+        if(p<1)requestAnimationFrame(step);
+        else el.textContent=raw;
+      }
+      requestAnimationFrame(step);
+    }
+    const cObs2=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){advCounter(e.target);cObs2.unobserve(e.target);}
+      });
+    },{threshold:.5});
+    document.querySelectorAll('.hsn,.chiffre-n,.real-val,.res-val').forEach(el=>{
+      // Éviter double observer
+      if(!el.dataset.observing){el.dataset.observing='1';cObs2.observe(el);}
+    });
+  }
+
+  /* ── Parallax multi-layers au scroll ── */
+  if(!nM&&!isTouch){
+    const layers=[
+      {sel:'.orb',speed:0.15},
+      {sel:'.hero-aurora',speed:0.08},
+      {sel:'.code-bg',speed:0.05},
+      {sel:'.hg',speed:0.22},
+    ];
+    let ticking=false;
+    window.addEventListener('scroll',()=>{
+      if(ticking)return;
+      ticking=true;
+      requestAnimationFrame(()=>{
+        const sy=window.scrollY;
+        layers.forEach(({sel,speed})=>{
+          document.querySelectorAll(sel).forEach(el=>{
+            el.style.transform=`translateY(${sy*speed}px)`;
+          });
+        });
+        ticking=false;
+      });
+    },{passive:true});
+  }
+
+  /* ── Hover sound-wave effect sur les cartes engagements ── */
+  if(!nM&&!isTouch){
+    document.querySelectorAll('.res-item').forEach(item=>{
+      item.addEventListener('mouseenter',()=>{
+        item.style.background='var(--n2)';
+        const val=item.querySelector('.res-val');
+        if(val)val.style.transform='scale(1.08)';
+      });
+      item.addEventListener('mouseleave',()=>{
+        item.style.background='';
+        const val=item.querySelector('.res-val');
+        if(val)val.style.transform='';
+      });
+    });
+  }
+
+  /* ── Spotlight effect sur la section contact ── */
+  if(!nM&&!isTouch){
+    const contactSec=document.querySelector('.contact-sec');
+    if(contactSec){
+      contactSec.addEventListener('mousemove',e=>{
+        const r=contactSec.getBoundingClientRect();
+        const x=((e.clientX-r.left)/r.width*100).toFixed(1);
+        const y=((e.clientY-r.top)/r.height*100).toFixed(1);
+        contactSec.style.backgroundImage=`
+          radial-gradient(circle 300px at ${x}% ${y}%, rgba(129,140,248,.06) 0%, transparent 70%),
+          radial-gradient(ellipse 58% 72% at 50% 50%,rgba(255,255,255,.018) 0%,transparent 65%),
+          radial-gradient(ellipse 36% 40% at 22% 85%,rgba(34,197,94,.028) 0%,transparent 60%)
+        `;
+      });
+      contactSec.addEventListener('mouseleave',()=>{
+        contactSec.style.backgroundImage='';
+      });
+    }
+  }
+
+
 })();
 
 </script>
