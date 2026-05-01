@@ -1294,15 +1294,6 @@ section{opacity:1}
 /* ── Hover magnetic sur les boutons ── */
 .btn-magnetic{transition:transform .2s var(--ease),box-shadow .2s}
 
-/* ── Progress bar sections ── */
-.section-progress{
-  position:absolute;bottom:0;left:0;height:1px;width:0;
-  background:linear-gradient(90deg,var(--acc),var(--v));
-  transition:width 1.2s var(--ease);
-  z-index:2;
-}
-section:hover .section-progress{width:100%}
-
 /* ── Data stream sur le hero ── */
 .data-stream{
   position:absolute;top:0;bottom:0;width:1px;
@@ -1365,7 +1356,7 @@ body::before{
 @keyframes scanlines{0%{background-position:0 0}100%{background-position:0 100px}}
 
 /* ── Halo pulsant sur le hero h1 ── */
-.h1{
+.h1.visible{
   text-shadow:0 0 40px rgba(129,140,248,.0);
   animation:halo-pulse 4s ease-in-out infinite;
 }
@@ -1581,6 +1572,177 @@ body::before{
   .h1{animation:none;text-shadow:none}
   .stitre{-webkit-text-fill-color:var(--w);background:none}
   .svc-card,.cadre{animation:none}
+}
+
+
+/* ════════════════════════════════════════════════════
+   ANIMATIONS TECH — SECTION SERVICES
+════════════════════════════════════════════════════ */
+
+/* ── Grille services : entrée en stagger 3D ── */
+.svc-grid{perspective:1200px}
+
+/* ── Carte : fond grid-lines au hover ── */
+.svc-card{
+  background-image:none;
+  transition:border-color .22s,transform .35s var(--ease),
+             box-shadow .35s,background .25s,background-image .3s;
+}
+.svc-card:hover{
+  background-image:
+    linear-gradient(rgba(129,140,248,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129,140,248,.025) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+
+/* ── Coin tech supérieur gauche ── */
+.svc-corner-tl{
+  position:absolute;top:10px;left:10px;
+  width:12px;height:12px;pointer-events:none;
+  border-top:1px solid var(--acc);
+  border-left:1px solid var(--acc);
+  opacity:0;transform:scale(.5);
+  transition:opacity .3s var(--ease),transform .3s var(--ease);
+}
+/* ── Coin tech inférieur droit ── */
+.svc-corner-br{
+  position:absolute;bottom:10px;right:10px;
+  width:12px;height:12px;pointer-events:none;
+  border-bottom:1px solid var(--v);
+  border-right:1px solid var(--v);
+  opacity:0;transform:scale(.5);
+  transition:opacity .3s var(--ease),transform .3s var(--ease);
+}
+.svc-card:hover .svc-corner-tl,
+.svc-card:hover .svc-corner-br{opacity:1;transform:scale(1)}
+
+/* ── Numéro de carte : style terminal ── */
+.svc-num{
+  font-family:monospace;font-size:.62rem;font-weight:700;
+  color:var(--acc);letter-spacing:.1em;
+  opacity:.5;
+  transition:opacity .2s,color .2s;
+}
+.svc-card:hover .svc-num{opacity:1;color:var(--acc)}
+
+/* ── Icône : rotation + glow au hover ── */
+.svc-ico{
+  width:38px;height:38px;border:1px solid var(--l2);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--n3);position:relative;overflow:hidden;
+  transition:border-color .25s,transform .35s var(--ease),box-shadow .3s;
+}
+.svc-ico::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at center,rgba(129,140,248,.15),transparent 70%);
+  opacity:0;transition:opacity .3s;
+}
+.svc-card:hover .svc-ico{
+  border-color:var(--acc);
+  transform:scale(1.12) rotate(-6deg);
+  box-shadow:0 0 12px rgba(129,140,248,.3);
+}
+.svc-card:hover .svc-ico::after{opacity:1}
+.svc-ico svg{
+  stroke:var(--t);fill:none;stroke-width:1.3;
+  stroke-linecap:round;stroke-linejoin:round;
+  width:15px;height:15px;
+  transition:stroke .25s,filter .25s;
+}
+.svc-card:hover .svc-ico svg{
+  stroke:var(--w);
+  filter:drop-shadow(0 0 4px rgba(129,140,248,.6));
+}
+
+/* ── Nom de service : slide + glow ── */
+.svc-nom{
+  font-size:.92rem;font-weight:700;color:var(--w);
+  font-family:var(--fh);line-height:1.2;
+  transition:letter-spacing .3s var(--ease),text-shadow .3s;
+}
+.svc-card:hover .svc-nom{
+  letter-spacing:.01em;
+  text-shadow:0 0 20px rgba(129,140,248,.25);
+}
+
+/* ── Bénéfice : indicateur data ── */
+.svc-benef{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.67rem;font-weight:600;
+  font-family:monospace;letter-spacing:.06em;
+  position:relative;
+}
+.svc-benef::after{
+  content:'▮';font-size:.5rem;
+  animation:cursor-blink .8s step-end infinite;
+  margin-left:2px;opacity:0;
+  transition:opacity .2s;
+}
+.svc-card:hover .svc-benef::after{opacity:.7}
+@keyframes cursor-blink{0%,100%{opacity:.7}50%{opacity:0}}
+
+/* ── Desc : lignes de code style ── */
+.svc-desc{
+  font-size:.72rem;color:var(--t);line-height:1.85;
+  border-left:2px solid transparent;
+  padding-left:0;
+  transition:border-color .3s,padding-left .3s var(--ease),color .3s;
+}
+.svc-card:hover .svc-desc{
+  border-color:var(--l3);
+  padding-left:8px;
+  color:var(--w2);
+}
+
+/* ── Data pulse : ligne horizontale animée ── */
+.svc-pulse{
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--acc),var(--v),transparent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .5s var(--ease);
+}
+.svc-card:hover .svc-pulse{transform:scaleX(1)}
+
+/* ── Particle burst sur l'icone ── */
+.svc-spark{
+  position:absolute;
+  width:3px;height:3px;border-radius:50%;
+  pointer-events:none;opacity:0;
+  animation:spark-out .5s ease-out forwards;
+}
+@keyframes spark-out{
+  0%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:0;transform:var(--spark-dir) scale(0)}
+}
+
+/* ── Hover : fond noise animé ── */
+.svc-card::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--v),transparent);
+  transform:scaleY(0);transform-origin:center;
+  transition:transform .34s var(--ease);
+}
+.svc-card:hover::after{transform:scaleY(1)}
+
+/* ── Counter badge sur la carte ── */
+.svc-count-badge{
+  position:absolute;top:12px;right:14px;
+  font-family:monospace;font-size:.52rem;
+  color:var(--t2);letter-spacing:.08em;
+  opacity:0;transform:translateY(-4px);
+  transition:opacity .3s,transform .3s var(--ease);
+}
+.svc-card:hover .svc-count-badge{opacity:1;transform:translateY(0)}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  .svc-card:hover{background-image:none}
+  .svc-corner-tl,.svc-corner-br{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .svc-card:hover .svc-ico{transform:scale(1.04);box-shadow:none}
+  .svc-card:hover .svc-nom{letter-spacing:normal;text-shadow:none}
+  .svc-benef::after{display:none}
 }
 
 </style>
@@ -1813,6 +1975,11 @@ body::before{
     <div class="svc-grid rvg">
 
       <div class="svc-card rv" data-color="cloud">
+        
+        <div class="svc-corner-tl"></div>
+        <div class="svc-corner-br"></div>
+        <div class="svc-pulse"></div>
+        <div class="svc-count-badge">SVC_001</div>
         <div class="svc-num">01</div>
         <div class="svc-ico">
           <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
@@ -1826,6 +1993,11 @@ body::before{
       </div>
 
       <div class="svc-card rv-r" data-color="cyber">
+        
+        <div class="svc-corner-tl"></div>
+        <div class="svc-corner-br"></div>
+        <div class="svc-pulse"></div>
+        <div class="svc-count-badge">SVC_002</div>
         <div class="svc-num">02</div>
         <div class="svc-ico">
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1839,6 +2011,11 @@ body::before{
       </div>
 
       <div class="svc-card rv" data-color="dev">
+        
+        <div class="svc-corner-tl"></div>
+        <div class="svc-corner-br"></div>
+        <div class="svc-pulse"></div>
+        <div class="svc-count-badge">SVC_003</div>
         <div class="svc-num">03</div>
         <div class="svc-ico">
           <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -1852,6 +2029,11 @@ body::before{
       </div>
 
       <div class="svc-card rv-r" data-color="integration">
+        
+        <div class="svc-corner-tl"></div>
+        <div class="svc-corner-br"></div>
+        <div class="svc-pulse"></div>
+        <div class="svc-count-badge">SVC_004</div>
         <div class="svc-num">04</div>
         <div class="svc-ico">
           <svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
@@ -1865,6 +2047,11 @@ body::before{
       </div>
 
       <div class="svc-card rv" data-color="auto">
+        
+        <div class="svc-corner-tl"></div>
+        <div class="svc-corner-br"></div>
+        <div class="svc-pulse"></div>
+        <div class="svc-count-badge">SVC_005</div>
         <div class="svc-num">05</div>
         <div class="svc-ico">
           <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
@@ -1878,6 +2065,11 @@ body::before{
       </div>
 
       <div class="svc-card rv-r" data-color="conseil">
+        
+        <div class="svc-corner-tl"></div>
+        <div class="svc-corner-br"></div>
+        <div class="svc-pulse"></div>
+        <div class="svc-count-badge">SVC_006</div>
         <div class="svc-num">06</div>
         <div class="svc-ico">
           <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
@@ -2257,7 +2449,9 @@ window.addEventListener('scroll',()=>{
 setTimeout(()=>{
   const logo=document.getElementById('nav-logo');
   if(logo)logo.classList.add('logo-revealed');
-},400);
+  const h1=document.querySelector('.h1');
+  if(h1)h1.classList.add('visible');
+},1400);
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 function updateActive(){
@@ -3107,26 +3301,165 @@ const noMotionAnim = window.matchMedia('(prefers-reduced-motion:reduce)').matche
     });
   }
 
-  /* ── Spotlight effect sur la section contact ── */
-  if(!nM&&!isTouch){
-    const contactSec=document.querySelector('.contact-sec');
-    if(contactSec){
-      contactSec.addEventListener('mousemove',e=>{
-        const r=contactSec.getBoundingClientRect();
-        const x=((e.clientX-r.left)/r.width*100).toFixed(1);
-        const y=((e.clientY-r.top)/r.height*100).toFixed(1);
-        contactSec.style.backgroundImage=`
-          radial-gradient(circle 300px at ${x}% ${y}%, rgba(129,140,248,.06) 0%, transparent 70%),
-          radial-gradient(ellipse 58% 72% at 50% 50%,rgba(255,255,255,.018) 0%,transparent 65%),
-          radial-gradient(ellipse 36% 40% at 22% 85%,rgba(34,197,94,.028) 0%,transparent 60%)
-        `;
+
+})();
+
+
+/* ════════════════════════════════════════════════════
+   ANIMATIONS TECH — SERVICES JS
+════════════════════════════════════════════════════ */
+(function(){
+  const nM=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const isTouch=window.matchMedia('(pointer:coarse)').matches;
+
+  /* ── Entrée stagger 3D des cartes ── */
+  const svcGrid = document.querySelector('.svc-grid');
+  if(svcGrid && !nM){
+    const cards = [...svcGrid.querySelectorAll('.svc-card')];
+    cards.forEach((card,i)=>{
+      card.style.opacity='0';
+      card.style.transform='translateY(40px) rotateX(8deg)';
+      card.style.transition=`opacity .6s var(--ease) ${i*.08}s, transform .6s var(--ease) ${i*.08}s`;
+    });
+    const gridObs = new IntersectionObserver(entries=>{
+      if(!entries[0].isIntersecting) return;
+      cards.forEach((card,i)=>{
+        setTimeout(()=>{
+          card.style.opacity='1';
+          card.style.transform='none';
+        }, i*80);
       });
-      contactSec.addEventListener('mouseleave',()=>{
-        contactSec.style.backgroundImage='';
-      });
-    }
+      gridObs.disconnect();
+    },{threshold:.1});
+    gridObs.observe(svcGrid);
   }
 
+  /* ── Spark burst sur icône au hover ── */
+  if(!isTouch && !nM){
+    document.querySelectorAll('.svc-card').forEach(card=>{
+      const ico = card.querySelector('.svc-ico');
+      if(!ico) return;
+      const colors = ['var(--acc)','var(--v)','rgba(255,255,255,.6)'];
+      const dirs = [
+        'translate(-14px,-14px)',
+        'translate(14px,-14px)',
+        'translate(-14px,14px)',
+        'translate(14px,14px)',
+        'translate(0,-18px)',
+        'translate(0,18px)',
+      ];
+      let sparked = false;
+      card.addEventListener('mouseenter',()=>{
+        if(sparked) return;
+        sparked = true;
+        dirs.forEach((dir,i)=>{
+          const spark = document.createElement('div');
+          spark.className = 'svc-spark';
+          spark.style.cssText=`
+            background:${colors[i%colors.length]};
+            left:${ico.offsetLeft + ico.offsetWidth/2 - 1.5}px;
+            top:${ico.offsetTop + ico.offsetHeight/2 - 1.5}px;
+            --spark-dir:${dir};
+            animation-delay:${i*30}ms;
+          `;
+          card.appendChild(spark);
+          setTimeout(()=>spark.remove(), 600);
+        });
+        setTimeout(()=>{sparked=false;}, 800);
+      });
+    });
+  }
+
+  /* ── Mouse spotlight dans chaque carte ── */
+  if(!isTouch){
+    document.querySelectorAll('.svc-card').forEach(card=>{
+      card.addEventListener('mousemove',e=>{
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX-r.left)/r.width*100).toFixed(1);
+        const y = ((e.clientY-r.top)/r.height*100).toFixed(1);
+        card.style.setProperty('--mx', x+'%');
+        card.style.setProperty('--my', y+'%');
+        card.style.backgroundImage=`
+          radial-gradient(circle 80px at ${x}% ${y}%, rgba(129,140,248,.08), transparent 70%),
+          linear-gradient(rgba(129,140,248,.022) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(129,140,248,.022) 1px, transparent 1px)
+        `;
+        card.style.backgroundSize=`auto, 22px 22px, 22px 22px`;
+      });
+      card.addEventListener('mouseleave',()=>{
+        card.style.backgroundImage='';
+        card.style.backgroundSize='';
+      });
+    });
+  }
+
+  /* ── Typage progressif du svc-benef au hover ── */
+  if(!nM && !isTouch){
+    document.querySelectorAll('.svc-card').forEach(card=>{
+      const benef = card.querySelector('.svc-benef');
+      if(!benef) return;
+      const orig = benef.textContent.trim();
+      let timer = null;
+      card.addEventListener('mouseenter',()=>{
+        let i=0;
+        clearInterval(timer);
+        benef.textContent='';
+        timer = setInterval(()=>{
+          benef.textContent += orig[i] || '';
+          i++;
+          if(i>=orig.length) clearInterval(timer);
+        }, 22);
+      });
+      card.addEventListener('mouseleave',()=>{
+        clearInterval(timer);
+        benef.textContent = orig;
+      });
+    });
+  }
+
+  /* ── Scan horizontal au hover ── */
+  if(!nM){
+    document.querySelectorAll('.svc-card').forEach(card=>{
+      const scan = document.createElement('div');
+      scan.style.cssText=`
+        position:absolute;left:0;right:0;height:1px;top:-2px;
+        background:linear-gradient(90deg,transparent,rgba(129,140,248,.7),rgba(34,197,94,.5),transparent);
+        pointer-events:none;z-index:3;opacity:0;transition:none;
+      `;
+      card.appendChild(scan);
+      card.addEventListener('mouseenter',()=>{
+        scan.style.opacity='1';
+        scan.style.top='-2px';
+        scan.style.transition='none';
+        requestAnimationFrame(()=>{
+          scan.style.transition='top .5s var(--ease), opacity .1s';
+          scan.style.top='102%';
+          setTimeout(()=>{scan.style.opacity='0'; scan.style.top='-2px';},520);
+        });
+      });
+    });
+  }
+
+  /* ── Compteur de caractères en temps réel sur la desc ── */
+  if(!isTouch){
+    document.querySelectorAll('.svc-card').forEach((card,idx)=>{
+      const badge = card.querySelector('.svc-count-badge');
+      if(!badge) return;
+      const num = String(idx+1).padStart(3,'0');
+      let dots=0, timer=null;
+      card.addEventListener('mouseenter',()=>{
+        timer=setInterval(()=>{
+          dots=(dots+1)%4;
+          badge.textContent=`SVC_0${idx+1} ${'·'.repeat(dots+1)}`;
+        },300);
+      });
+      card.addEventListener('mouseleave',()=>{
+        clearInterval(timer);
+        dots=0;
+        badge.textContent=`SVC_00${idx+1}`;
+      });
+    });
+  }
 
 })();
 
