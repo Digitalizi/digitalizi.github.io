@@ -1196,7 +1196,6 @@ section{opacity:1}
 
 /* ── Glitch sur le titre h1 au hover ── */
 .h1{position:relative}
-.h1:hover{animation:glitch-main .4s var(--ease)}
 @keyframes glitch-main{
   0%,100%{transform:none;filter:none}
   20%{transform:translate(-2px,1px);filter:hue-rotate(90deg)}
@@ -1355,14 +1354,9 @@ body::before{
 }
 @keyframes scanlines{0%{background-position:0 0}100%{background-position:0 100px}}
 
-/* ── Halo pulsant sur le hero h1 ── */
+/* ── Halo pulsant sur le hero h1 — text-shadow uniquement, pas d'animation ── */
 .h1.visible{
-  text-shadow:0 0 40px rgba(129,140,248,.0);
-  animation:halo-pulse 4s ease-in-out infinite;
-}
-@keyframes halo-pulse{
-  0%,100%{text-shadow:0 0 20px rgba(129,140,248,.0)}
-  50%{text-shadow:0 0 40px rgba(129,140,248,.15),0 0 80px rgba(34,197,94,.08)}
+  text-shadow:0 0 30px rgba(129,140,248,.12),0 0 60px rgba(34,197,94,.06);
 }
 
 /* ── Particles flottantes CSS sur la section problème ── */
@@ -1569,7 +1563,6 @@ body::before{
   body::before,.matrix-col,.laser-sweep,.halo-pulse,.badge-orbit,
   .vel-bar,body::after{display:none !important}
   .nav-logo{animation:none}
-  .h1{animation:none;text-shadow:none}
   .stitre{-webkit-text-fill-color:var(--w);background:none}
   .svc-card,.cadre{animation:none}
 }
@@ -2999,46 +2992,6 @@ const noMotionAnim = window.matchMedia('(prefers-reduced-motion:reduce)').matche
   },{passive:true});
 })();
 
-/* ── Compteur avec effet scramble sur les chiffres ── */
-(function(){
-  if(noMotionAnim)return;
-  const chars='0123456789';
-  function scramble(el, finalVal, duration){
-    const raw=el.dataset.orig||el.textContent.trim();
-    el.dataset.orig=raw;
-    const num=parseFloat(raw.replace(/[^0-9.]/g,''));
-    if(isNaN(num)||num===0)return;
-    const prefix=raw.match(/^[^0-9]*/)?.[0]||'';
-    const suffix=raw.match(/[^0-9.]+$/)?.[0]||'';
-    let start=null;
-    function step(ts){
-      if(!start)start=ts;
-      const p=Math.min((ts-start)/duration,1);
-      const ease=1-(1-p)**3;
-      if(p<.6){
-        // Phase scramble : chiffres aléatoires
-        const scrambled=Array.from({length:String(Math.round(num)).length},
-          ()=>chars[Math.floor(Math.random()*chars.length)]).join('');
-        el.textContent=prefix+scrambled+suffix;
-      } else {
-        // Phase reveal : vrai chiffre
-        el.textContent=prefix+Math.round(ease*num)+suffix;
-      }
-      if(p<1)requestAnimationFrame(step);
-      else el.textContent=raw;
-    }
-    requestAnimationFrame(step);
-  }
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        scramble(e.target,null,1800);
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:.6});
-  document.querySelectorAll('.hsn,.chiffre-n,.real-val,.res-val').forEach(el=>obs.observe(el));
-})();
 
 /* ── Highlight ligne active des prob-lignes ── */
 (function(){
@@ -3219,46 +3172,34 @@ const noMotionAnim = window.matchMedia('(prefers-reduced-motion:reduce)').matche
       });
     });
   }
-
-  /* ── Counter with scramble + glitch ── */
+  /* ── Compteur simple ── */
   if(!nM){
-    const CHARS='0123456789';
-    function advCounter(el){
+    function simpleCounter(el){
       const raw=el.dataset.orig||el.textContent.trim();
       el.dataset.orig=raw;
       const num=parseFloat(raw.replace(/[^0-9.]/g,''));
       if(isNaN(num)||num===0)return;
       const pre=raw.match(/^[^0-9]*/)?.[0]||'';
       const suf=raw.match(/[^0-9.]+$/)?.[0]||'';
-      const dur=2200,s=performance.now();
-      function step(now){
+      const dur=1800,s=performance.now();
+      (function step(now){
         const p=Math.min((now-s)/dur,1);
-        const e=1-(1-p)**4;
-        if(p<.55){
-          const len=String(Math.round(num)).length;
-          el.textContent=pre+Array.from({length:len},()=>
-            CHARS[Math.floor(Math.random()*10)]).join('')+suf;
-        } else {
-          el.textContent=pre+Math.round(e*num)+suf;
-          if(Math.random()<.08){
-            el.style.animation='num-glitch .15s ease';
-            setTimeout(()=>el.style.animation='',200);
-          }
-        }
+        const e=1-(1-p)**3;
+        el.textContent=pre+Math.round(e*num)+suf;
         if(p<1)requestAnimationFrame(step);
         else el.textContent=raw;
-      }
-      requestAnimationFrame(step);
+      })(s);
     }
-    const cObs2=new IntersectionObserver(entries=>{
+    const ctr=new IntersectionObserver(entries=>{
       entries.forEach(e=>{
-        if(e.isIntersecting){advCounter(e.target);cObs2.unobserve(e.target);}
+        if(e.isIntersecting&&!e.target.dataset.done){
+          e.target.dataset.done='1';
+          simpleCounter(e.target);
+          ctr.unobserve(e.target);
+        }
       });
     },{threshold:.5});
-    document.querySelectorAll('.hsn,.chiffre-n,.real-val,.res-val').forEach(el=>{
-      // Éviter double observer
-      if(!el.dataset.observing){el.dataset.observing='1';cObs2.observe(el);}
-    });
+    document.querySelectorAll('.hsn,.chiffre-n,.real-val,.res-val').forEach(el=>ctr.observe(el));
   }
 
   /* ── Parallax multi-layers au scroll ── */
